@@ -20,3 +20,5 @@ def about(request):
     }
     return render(request,'main/about.html',context)
 
+def panel(request):
+    return render(request,'back/index.html')
