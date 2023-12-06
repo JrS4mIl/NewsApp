@@ -11,6 +11,10 @@ class News(models.Model):
     pic = models.TextField()
     writer = models.CharField(max_length=50)
     slug=models.SlugField(max_length=20,default='')
+    catname=models.CharField(max_length=50,default="")
+    catid=models.IntegerField(default=0)
+    show=models.IntegerField(default=0)
+
 
     def __str__(self):
         return self.name

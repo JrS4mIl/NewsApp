@@ -143,10 +143,10 @@
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">News</span></a>
                                     <ul>
                                         <li>
-                                            <a href="page_layout_static.html">Add News</a>
+                                            <a href="{% url 'add_news' %}">Add News</a>
                                         </li>
                                         <li>
-                                            <a href="page_layout_static.html">News List</a>
+                                            <a href="{% url 'news_list' %}">News List</a>
                                         </li>
 
                                     </ul>
@@ -264,7 +264,8 @@
         <script src="{% static 'back/js/helpers/gmaps.min.js' %}"></script>
 
         <!-- Load and execute javascript code used only in this page -->
-        <script src="{% static 'back/js/pages/index.js' %}"></script>
-        <script>$(function(){ Index.init(); });</script>
+        {% block footerblock %}
+        {% endblock footerblock %}
+
     </body>
 </html>

@@ -1,0 +1,72 @@
+{% extends 'back/master.html' %}
+{% load static %}
+
+{% block mainblock %}
+{% include 'back/message.html' %}
+
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>News List<br><small>you can add,edit and delete your data!</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>News</li>
+    <li><a href="{% url 'news_list' %}">List</a></li>
+</ul>
+<div class="block full">
+    <div class="block-title">
+        <h2><strong>News</strong> List</h2>
+    </div>
+
+
+    <div class="table-responsive">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Image</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Writer</th>
+                <th>Views</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for i in news %}
+                <td class="text-center">{{i.pk}}</td>
+                <td class="text-center"><img src="{% static 'back/img/placeholders/avatars/avatar15.jpg'  %}" alt="avatar"
+                                             class="img-circle"></td>
+                <td>{{i.name}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.catname}}</td>
+                <td>{{i.writer}}</td>
+                <td>{{i.show}}</td>
+                <td>-</td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
+                           class="btn btn-xs btn-default"><i class="fa fa-pencil">Edit</i></a>
+                        <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                class="fa fa-times">Delete</i></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+ {% block footerblock %}
+<script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+<script>$(function(){ TablesDatatables.init(); });</script>
+{% endblock footerblock %}

@@ -66,40 +66,14 @@
                             <div class="col-sm-6">
                                 <!-- Widget -->
                                 <a href="page_comp_charts.html" class="widget widget-hover-effect1">
-                                    <div class="widget-simple">
-                                        <div class="widget-icon pull-left themed-background animation-fadeIn">
-                                            <i class="gi gi-wallet"></i>
-                                        </div>
-                                        <div class="pull-right">
-                                            <!-- Jquery Sparkline (initialized in js/pages/index.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
-                                            <span id="mini-chart-sales"></span>
-                                        </div>
-                                        <h3 class="widget-content animation-pullDown visible-lg">
-                                            Latest <strong>Sales</strong>
-                                            <small>Per hour</small>
-                                        </h3>
-                                    </div>
+
                                 </a>
                                 <!-- END Widget -->
                             </div>
-                            <div class="col-sm-6">
-                                <!-- Widget -->
-                                <a href="page_widgets_stats.html" class="widget widget-hover-effect1">
-                                    <div class="widget-simple">
-                                        <div class="widget-icon pull-left themed-background animation-fadeIn">
-                                            <i class="gi gi-crown"></i>
-                                        </div>
-                                        <div class="pull-right">
-                                            <!-- Jquery Sparkline (initialized in js/pages/index.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
-                                            <span id="mini-chart-brand"></span>
-                                        </div>
-                                        <h3 class="widget-content animation-pullDown visible-lg">
-                                            Our <strong>Brand</strong>
-                                            <small>Popularity over time</small>
-                                        </h3>
-                                    </div>
-                                </a>
-                                <!-- END Widget -->
-                            </div>
+
                         </div>
 {% endblock %}
+ {% block footerblock %}
+<script src="{% static 'back/js/pages/index.js' %}"></script>
+<script>$(function(){ Index.init(); });</script>
+{% endblock footerblock %}
