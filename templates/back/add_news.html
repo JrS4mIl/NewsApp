@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block mainblock %}
+{% include 'back/message.html' %}
+
 <div class="content-header">
     <div class="header-section">
         <h1>
@@ -54,6 +56,11 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <textarea type="text" name="newstxt" id="newstxt" rows="5" class="form-control" placeholder="Body Text"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="file" name="myfile" id="myfile" rows="5" class="form-control">
                     </div>
                 </div>
 

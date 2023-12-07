@@ -18,3 +18,18 @@
   {% endfor %}
 
 {% endif %}
+
+<script>// Bu kod, sayfa yüklendiğinde çalışacak
+document.addEventListener('DOMContentLoaded', function() {
+  // Tüm mesajları seç
+  var messages = document.querySelectorAll('.alert');
+
+  // Her bir mesaj için işlem yap
+  messages.forEach(function(message) {
+    // Mesajları 3 saniye sonra kaldır
+    setTimeout(function() {
+      message.style.display = 'none';
+    }, 3000);
+  });
+});
+</script>

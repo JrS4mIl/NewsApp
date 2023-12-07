@@ -7,17 +7,17 @@
 <div class="content-header">
     <div class="header-section">
         <h1>
-            <i class="fa fa-table"></i>News List<br><small>you can add,edit and delete your data!</small>
+            <i class="fa fa-table"></i>Categories List<br><small>you can add,edit and delete your data!</small>
         </h1>
     </div>
 </div>
 <ul class="breadcrumb breadcrumb-top">
-    <li>News</li>
-    <li><a href="{% url 'news_list' %}">List</a></li>
+    <li>Category</li>
+    <li><a href="{% url 'cat_list' %}">List</a></li>
 </ul>
 <div class="block full">
     <div class="block-title">
-        <h2><strong>News</strong> List</h2>
+        <h2><strong>Category</strong> List</h2>
     </div>
 
 
@@ -25,27 +25,17 @@
         <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
             <tr>
-                <th class="text-center">ID</th>
-                <th class="text-center">Image</th>
+
                 <th>Title</th>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Writer</th>
-                <th>Views</th>
-                <th class="text-center">Actions</th>
+
             </tr>
             </thead>
             <tbody>
             <tr>
-                {% for i in news %}
+                {% for i in cat %}
                 <td class="text-center">{{i.pk}}</td>
-                <td class="text-center"><img src="{{i.picurl}}" alt="avatar" class="img-circle" width="50px" height="50px"></td>
                 <td>{{i.name}}</td>
-                <td>{{i.created_date}}</td>
-                <td>{{i.catname}}</td>
-                <td>{{i.writer}}</td>
-                <td>{{i.show}}</td>
-                <td>-</td>
+
                 <td class="text-center">
                     <div class="btn-group">
                         <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
