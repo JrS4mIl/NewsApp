@@ -3,7 +3,7 @@ from .models import News
 from main.models import Main
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
-
+from subcat.models import SubCat
 # Create your views here.
 def news_detail(request, slug):
     news = News.objects.filter(slug=slug)
@@ -25,11 +25,16 @@ def news_list(request):
 
 
 def add_news(request):
+    subcat=SubCat.objects.all()
+    context={
+        'subcat':subcat
+    }
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
         newscat=request.POST.get('newscat')
         newstxtshort=request.POST.get('newstxtshort')
         newstxt=request.POST.get('newstxt')
+        newsid=request.POST.get('newscat')
 
         if newstitle=="" or newstxt=="" or newstxtshort=="" or newstxt=="" or newscat=="":
            messages.error(request,'Bos Gecilmez')
@@ -40,11 +45,13 @@ def add_news(request):
             filename=fs.save(myfile.name,myfile)
             url=fs.url(filename)
 
+
             if str(myfile.content_type).startswith('image'):
                 if myfile.size<5000000:
+                    newsname=SubCat.objects.get(pk=newsid).name
 
                     data = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date="2023", picname=filename,
-                                picurl=url, writer='.', catname=newscat, catid=0, show=0)
+                                picurl=url, writer='.', catname=newsname, catid=newsid, show=0)
                     data.save()
                     messages.success(request, 'News Added')
                     return redirect('news_list')
@@ -65,7 +72,7 @@ def add_news(request):
             messages.error(request, 'Lutfen Image Alanini Bos gecmeyelim')
             return redirect('add_news')
 
-    return render(request, 'back/add_news.html')
+    return render(request, 'back/add_news.html',context)
 
 def news_delete(request,pk):
     try:

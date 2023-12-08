@@ -143,10 +143,22 @@
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Category</span></a>
                                     <ul>
                                         <li>
-                                            <a href="">Add New</a>
+                                            <a href="{% url 'add_cat' %}">Add Category</a>
                                         </li>
                                         <li>
-                                            <a href="{% url 'cat_list' %}">Manage</a>
+                                            <a href="{% url 'cat_list' %}">Category List</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Sub Category</span></a>
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'subcat_add' %}">Add SubCategory</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'subcat_list' %}">SubCategory List</a>
                                         </li>
 
                                     </ul>
