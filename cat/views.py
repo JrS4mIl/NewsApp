@@ -25,6 +25,7 @@ def cat_add(request):
             data=Category(name=name)
             data.save()
             messages.success(request,'Category Basariyla Eklendi')
+
             return redirect('cat_list')
 
 

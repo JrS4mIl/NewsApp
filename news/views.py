@@ -51,9 +51,11 @@ def add_news(request):
                 if myfile.size<5000000:
                     newsname=SubCat.objects.get(pk=newsid).name
 
-                    data = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date="2023", picname=filename,
-                                picurl=url, writer='.', catname=newsname, catid=newsid, show=0)
+
+                    data = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date="2023", picname=filename,picurl=url, writer='.', catname=newsname, catid=newsid, show=0,ocatid=ocatid)
                     data.save()
+
+
                     messages.success(request, 'News Added')
                     return redirect('news_list')
                 else:
@@ -117,7 +119,6 @@ def news_edit(request,pk):
             if str(myfile.content_type).startswith('image'):
                 if myfile.size<5000000:
                     newsname=SubCat.objects.get(pk=newsid).name
-
 
                     data = News.objects.get(pk=pk)
                     fss = FileSystemStorage()

@@ -3,7 +3,9 @@
 
 {% block mainblock %}
 {% include 'back/message.html' %}
-
+{% block headblock %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
 <div class="content-header">
     <div class="header-section">
         <h1>
@@ -68,6 +70,30 @@
                         <img src="{{news.picurl}}" class="img-circle" width="60px" height="60px">
                     </div>
                 </div>
+                 <script>
+                ClassicEditor
+                  .create( document.querySelector( '#newstxt' ), {
+                    // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                  } )
+                  .then( newstxt => {
+                    window.editor = editor;
+                  } )
+                  .catch( err => {
+                    console.error( err.stack );
+                  } );
+          </script>
+                       <script>
+                ClassicEditor
+                  .create( document.querySelector( '#newstxtshort' ), {
+                    // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                  } )
+                  .then( newstxtshort => {
+                    window.editor = editor;
+                  } )
+                  .catch( err => {
+                    console.error( err.stack );
+                  } );
+          </script>
 
 
 

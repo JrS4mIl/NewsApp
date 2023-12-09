@@ -3,7 +3,9 @@
 
 {% block mainblock %}
 {% include 'back/message.html' %}
-
+{% block headblock %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
 <div class="content-header">
     <div class="header-section">
         <h1>
@@ -28,11 +30,13 @@
             <!-- END Form Elements Title -->
 
             <!-- Basic Form Elements Content -->
-            <form action="{% url 'add_news' %}" method="POST" enctype="multipart/form-data" class="form-horizontal form-bordered">
+            <form action="{% url 'add_news' %}" method="POST" enctype="multipart/form-data"
+                  class="form-horizontal form-bordered">
                 {% csrf_token %}
                 <div class="form-group">
                     <div class="col-md-6">
-                        <input type="text" id="newstitle" name="newstitle" class="form-control" placeholder="News Title">
+                        <input type="text" id="newstitle" name="newstitle" class="form-control"
+                               placeholder="News Title">
                     </div>
                     <div class="col-md-6">
 
@@ -51,20 +55,45 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea type="text" name="newstxtshort" id="newstxtshort" rows="5" class="form-control" placeholder="Short Text"></textarea>
+                        <textarea type="text" name="newstxtshort" id="newstxtshort" rows="5" class="form-control"
+                                  placeholder="Short Text"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea type="text" name="newstxt" id="newstxt" rows="5" class="form-control" placeholder="Body Text"></textarea>
+                        <textarea type="text" name="newstxt" id="newstxt" rows="5" class="form-control"
+                                  placeholder="Body Text"></textarea>
                     </div>
                 </div>
+                <script>
+                    ClassicEditor
+                      .create( document.querySelector( '#newstxt' ), {
+                        // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                      } )
+                      .then( newstxtshort => {
+                        window.editor = editor;
+                      } )
+                      .catch( err => {
+                        console.error( err.stack );
+                      } );
+                </script>
+                <script>
+                    ClassicEditor
+                      .create( document.querySelector( '#newstxtshort' ), {
+                        // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                      } )
+                      .then( newstxtshort => {
+                        window.editor = editor;
+                      } )
+                      .catch( err => {
+                        console.error( err.stack );
+                      } );
+                </script>
                 <div class="form-group">
                     <div class="col-md-12">
                         <input type="file" name="myfile" id="myfile" rows="5" class="form-control">
                     </div>
                 </div>
-
 
 
                 <div class="form-group">
