@@ -50,10 +50,14 @@ def add_news(request):
             if str(myfile.content_type).startswith('image'):
                 if myfile.size<5000000:
                     newsname=SubCat.objects.get(pk=newsid).name
+                    ocatid=SubCat.objects.get(pk=newsid).catid
 
+                    b = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date="2023", picname=filename,picurl=url, writer='.', catname=newsname, catid=newsid, show=0,ocatid=ocatid)
+                    b.save()
 
-                    data = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date="2023", picname=filename,picurl=url, writer='.', catname=newsname, catid=newsid, show=0,ocatid=ocatid)
-                    data.save()
+                    count=len(News.objects.filter(ocatid=ocatid))
+                    b.count=count
+                    b.save()
 
 
                     messages.success(request, 'News Added')
@@ -82,7 +86,14 @@ def news_delete(request,pk):
         b=News.objects.get(pk=pk)
         fs=FileSystemStorage()
         fs.delete(b.picname)
+        ocatid = News.objects.get(pk=pk).ocatid
         b.delete()
+
+        count = len(News.objects.filter(ocatid=ocatid))
+
+        m = Category.objects.get(pk=ocatid)
+        m.count = count
+        b.save()
     except:
         messages.error(request,'Somting Wrong')
 
