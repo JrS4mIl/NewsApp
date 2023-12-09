@@ -1,0 +1,15 @@
+{% extends 'back/master.html' %}
+{% load static %}
+
+{% block mainblock %}
+<div class="uyari">
+  <h2>Uyarı!</h2>
+  <p>Boyle Bir Sayfa bulunamadi.</p>
+</div>
+
+{% endblock %}
+
+ {% block footerblock %}
+<script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+<script>$(function(){ TablesDatatables.init(); });</script>
+{% endblock footerblock %}
