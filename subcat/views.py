@@ -2,7 +2,10 @@ from django.shortcuts import render,redirect
 from .models import SubCat
 from django.contrib import messages
 from cat.models import Category
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+@login_required(login_url='login')
 def subcat_list(request):
     subcat=SubCat.objects.all()
     context={
@@ -11,7 +14,7 @@ def subcat_list(request):
 
     return  render(request,'back/subcat_list.html',context)
 
-
+@login_required(login_url='login')
 def subcat_add(request):
     cat=Category.objects.all()
     if request.method=='POST':

@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from .models import Category
 from django.contrib import messages
 # Create your views here.
+@login_required(login_url='login')
 def cat_list(request):
+
     cat=Category.objects.all()
     context={
         'cat':cat
@@ -10,7 +13,7 @@ def cat_list(request):
 
     return  render(request,'back/cat_list.html',context)
 
-
+@login_required(login_url='login')
 def cat_add(request):
     if request.method=='POST':
         name=request.POST.get('name')

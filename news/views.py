@@ -6,6 +6,8 @@ from django.core.files.storage import FileSystemStorage
 from subcat.models import SubCat
 from cat.models import Category
 # Create your views here.
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='login')
 def news_detail(request, slug):
     news = News.objects.filter(slug=slug)
     site = Main.objects.get(pk=1)
@@ -16,7 +18,7 @@ def news_detail(request, slug):
     }
     return render(request, 'news/detail.html', context)
 
-
+@login_required(login_url='login')
 def news_list(request):
     news = News.objects.all()
     context = {
@@ -25,6 +27,7 @@ def news_list(request):
     return render(request, 'back/news_list.html', context)
 
 
+@login_required(login_url='login')
 def add_news(request):
     subcat=SubCat.objects.all()
     context={
@@ -80,7 +83,7 @@ def add_news(request):
             return redirect('add_news')
 
     return render(request, 'back/add_news.html',context)
-
+@login_required(login_url='login')
 def news_delete(request,pk):
     try:
         b=News.objects.get(pk=pk)
@@ -98,7 +101,7 @@ def news_delete(request,pk):
         messages.error(request,'Somting Wrong')
 
     return redirect('news_list')
-
+@login_required(login_url='login')
 def news_edit(request,pk):
     if len(News.objects.filter(pk=pk))==0:
 
