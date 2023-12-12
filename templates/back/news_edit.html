@@ -70,6 +70,12 @@
                         <img src="{{news.picurl}}" class="img-circle" width="60px" height="60px">
                     </div>
                 </div>
+                 <div class="form-group">
+                    <div class="col-md-6">
+                        <textarea type="text" name="tag" id="tag" rows="5" class="form-control"
+                                  placeholder="Tags">{{news.tag}}</textarea>
+                    </div>
+                </div>
                  <script>
                 ClassicEditor
                   .create( document.querySelector( '#newstxt' ), {

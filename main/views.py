@@ -16,13 +16,15 @@ def home(request):
     cat = Category.objects.all()
     subcat = SubCat.objects.all()
     slider = News.objects.all().order_by('-created_date')[:3]
+    popnews=News.objects.all().order_by('-show')[:3]
 
     context = {
         'site': site,
         'news': news,
         'cat': cat,
         'subcat': subcat,
-        'slider': slider
+        'slider': slider,
+        'popnews':popnews
 
     }
     return render(request, 'main/home.html', context)

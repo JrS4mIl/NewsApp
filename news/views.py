@@ -9,12 +9,31 @@ from cat.models import Category
 from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def news_detail(request, slug):
+    popnews = News.objects.all().order_by('-show')[:3]
+    tagname=News.objects.get(slug=slug).tag
+    tag=tagname.split(',')
+
+    cat = Category.objects.all()
+    subcat = SubCat.objects.all()
     news = News.objects.filter(slug=slug)
     site = Main.objects.get(pk=1)
+    shownews=News.objects.filter(slug=slug)
+    try:
+        mynews=News.objects.get(slug=slug)
+        mynews.show=mynews.show+1
+        mynews.save()
+    except:
+        print('Cant Add show ')
 
     context = {
         'site': site,
-        'news': news
+        'news': news,
+        'cat':cat,
+        'subcat':subcat,
+        'shownews':shownews,
+        'popnews':popnews,
+        'tag':tag,
+
     }
     return render(request, 'news/detail.html', context)
 
@@ -39,6 +58,7 @@ def add_news(request):
         newstxtshort=request.POST.get('newstxtshort')
         newstxt=request.POST.get('newstxt')
         newsid=request.POST.get('newscat')
+        tag=request.POST.get('tag')
 
         if newstitle=="" or newstxt=="" or newstxtshort=="" or newstxt=="" or newscat=="":
            messages.error(request,'Bos Gecilmez')
@@ -55,7 +75,7 @@ def add_news(request):
                     newsname=SubCat.objects.get(pk=newsid).name
                     ocatid=SubCat.objects.get(pk=newsid).catid
 
-                    b = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date="2023", picname=filename,picurl=url, writer='.', catname=newsname, catid=newsid, show=0,ocatid=ocatid)
+                    b = News(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, date="2023", picname=filename,picurl=url, writer='.', catname=newsname, catid=newsid, show=0,ocatid=ocatid,tag=tag)
                     b.save()
 
                     count=len(News.objects.filter(ocatid=ocatid))
@@ -119,6 +139,7 @@ def news_edit(request,pk):
         newstxtshort=request.POST.get('newstxtshort')
         newstxt=request.POST.get('newstxt')
         newsid=request.POST.get('newscat')
+        tag=request.POST.get('tag')
 
         if newstitle=="" or newstxt=="" or newstxtshort=="" or newstxt=="" or newscat=="":
            messages.error(request,'Bos Gecilmez')
@@ -144,6 +165,7 @@ def news_edit(request,pk):
                     data.picurl=url
                     data.catname=newsname
                     data.catid=newsid
+                    data.tag=tag
                     data.save()
                     messages.success(request, 'News Added')
                     return redirect('news_list')
@@ -171,6 +193,9 @@ def news_edit(request,pk):
 
             data.catname = newsname
             data.catid = newsid
+
+            data.tag = tag
+
             data.save()
             messages.success(request, 'Update News')
             return redirect('news_list')

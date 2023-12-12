@@ -18,6 +18,7 @@ class News(models.Model):
     show=models.IntegerField(default=0)
     update_date = models.DateTimeField(blank=True, auto_now=True)
     created_date = models.DateTimeField(blank=True, auto_now_add=True)
+    tag=models.TextField(default='')
 
 
 
