@@ -162,4 +162,5 @@ def contact(request):
         'cat':cat,
         'subcat':subcat
     }
+
     return render(request,'main/contact.html',context)
