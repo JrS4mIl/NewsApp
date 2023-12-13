@@ -1,0 +1,93 @@
+{% extends 'back/master.html' %}
+{% load static %}
+
+{% block mainblock %}
+{% include 'back/message.html' %}
+{% block headblock %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>Edit About<br><small>you can add,edit and delete your data!</small>
+        </h1>
+    </div>
+</div>
+
+<ul class="breadcrumb breadcrumb-top">
+    <li>About</li>
+    <li><a href="{% url 'about_settings' %}">Edit</a></li>
+</ul>
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+
+                <h2><strong>About</strong>Edit</h2>
+            </div>
+            <!-- END Form Elements Title -->
+
+            <!-- Basic Form Elements Content -->
+            <form action="{% url 'about_settings'  %}" method="POST" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                {% csrf_token %}
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <textarea type="text" name="txt" id="txt" rows="5" class="form-control" placeholder="Short Text">{{news.short_txt}}</textarea>
+                    </div>
+                </div>
+
+
+                 <script>
+                ClassicEditor
+                  .create( document.querySelector( '#newstxt' ), {
+                    // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                  } )
+                  .then( newstxt => {
+                    window.editor = editor;
+                  } )
+                  .catch( err => {
+                    console.error( err.stack );
+                  } );
+          </script>
+                       <script>
+                ClassicEditor
+                  .create( document.querySelector( '#newstxtshort' ), {
+                    // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                  } )
+                  .then( newstxtshort => {
+                    window.editor = editor;
+                  } )
+                  .catch( err => {
+                    console.error( err.stack );
+                  } );
+          </script>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right">Update About</i>
+                        </button>
+                    </div>
+                </div>
+
+
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block footerblock %}
+<script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+<script>$(function(){ TablesDatatables.init(); });</script>
+{% endblock footerblock %}

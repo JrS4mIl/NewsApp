@@ -26,6 +26,7 @@ urlpatterns = [
     path('',include('news.urls')),
     path('',include('cat.urls')),
     path('',include('subcat.urls')),
+    path('',include('contactform.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

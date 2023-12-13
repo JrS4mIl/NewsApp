@@ -31,10 +31,15 @@ def home(request):
 
 
 def about(request):
+    popnews = News.objects.all().order_by('-show')[:3]
     site = Main.objects.get(pk=1)
+    cat = Category.objects.all()
+
 
     context = {
         'site': site,
+        'cat': cat,
+        'popnews':popnews,
     }
     return render(request, 'main/about.html', context)
 
@@ -128,3 +133,33 @@ def site_settings(request):
         'site': site
     }
     return render(request, 'back/settings.html', context)
+@login_required(login_url='login')
+def about_settings(request):
+    if request.method=='POST':
+        txt=request.POST.get('txt')
+        if txt=="":
+            messages.error(request,'Text Alanini Bos Gecmeyiniz')
+
+        b=Main.objects.get(pk=1)
+        b.abouttxt=txt
+        b.save()
+        messages.success(request,'Guncellendi')
+    context = {
+        'about': about
+    }
+
+
+    return render(request,'back/about_settings.html',context)
+
+def contact(request):
+    popnews = News.objects.all().order_by('-show')[:3]
+    subcat = SubCat.objects.all()
+    cat = Category.objects.all()
+    site = Main.objects.get(pk=1)
+    context={
+        'site':site,
+        'popnews':popnews,
+        'cat':cat,
+        'subcat':subcat
+    }
+    return render(request,'main/contact.html',context)
