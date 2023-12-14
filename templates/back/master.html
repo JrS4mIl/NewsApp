@@ -149,6 +149,7 @@
                                     <a href="/panel" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
                                 </li>
 
+
                                 
 
                                
@@ -164,6 +165,22 @@
 
                                  <li>
                                     <a href="{% url 'about_settings' %}" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">About Settings</span></a>
+                                </li>
+
+                                <li class="sidebar-header">
+                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                    <span class="sidebar-header-title">Manager List</span>
+                                </li>
+                                <li>
+                                    <a href="{% url 'manager_list' %}" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Manager List</span></a>
+                                </li>
+
+                                 <li class="sidebar-header">
+                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                    <span class="sidebar-header-title">Permissions</span>
+                                </li>
+                                <li>
+                                    <a href="{% url 'manager_group' %}" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Manager Group</span></a>
                                 </li>
 
 
