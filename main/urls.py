@@ -11,6 +11,6 @@ urlpatterns = [
     path('logout/',views.logout,name='logout'),
     path('panel/settings',views.site_settings,name='site_settings'),
     path('panel/about/settings',views.about_settings,name='about_settings'),
-
+    path('panel/change/pass', views.change_password, name='change_pass'),
 
 ]

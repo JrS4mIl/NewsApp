@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Main
@@ -6,6 +7,7 @@ from news.models import News
 from cat.models import Category
 from subcat.models import SubCat
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
 
 from django.contrib import messages, auth
 
@@ -16,7 +18,7 @@ def home(request):
     cat = Category.objects.all()
     subcat = SubCat.objects.all()
     slider = News.objects.all().order_by('-created_date')[:3]
-    popnews=News.objects.all().order_by('-show')[:3]
+    popnews = News.objects.all().order_by('-show')[:3]
 
     context = {
         'site': site,
@@ -24,7 +26,7 @@ def home(request):
         'cat': cat,
         'subcat': subcat,
         'slider': slider,
-        'popnews':popnews
+        'popnews': popnews
 
     }
     return render(request, 'main/home.html', context)
@@ -35,11 +37,10 @@ def about(request):
     site = Main.objects.get(pk=1)
     cat = Category.objects.all()
 
-
     context = {
         'site': site,
         'cat': cat,
-        'popnews':popnews,
+        'popnews': popnews,
     }
     return render(request, 'main/about.html', context)
 
@@ -133,34 +134,71 @@ def site_settings(request):
         'site': site
     }
     return render(request, 'back/settings.html', context)
+
+
 @login_required(login_url='login')
 def about_settings(request):
-    if request.method=='POST':
-        txt=request.POST.get('txt')
-        if txt=="":
-            messages.error(request,'Text Alanini Bos Gecmeyiniz')
+    if request.method == 'POST':
+        txt = request.POST.get('txt')
+        if txt == "":
+            messages.error(request, 'Text Alanini Bos Gecmeyiniz')
 
-        b=Main.objects.get(pk=1)
-        b.abouttxt=txt
+        b = Main.objects.get(pk=1)
+        b.abouttxt = txt
         b.save()
-        messages.success(request,'Guncellendi')
+        messages.success(request, 'Guncellendi')
     context = {
         'about': about
     }
 
+    return render(request, 'back/about_settings.html', context)
 
-    return render(request,'back/about_settings.html',context)
 
 def contact(request):
     popnews = News.objects.all().order_by('-show')[:3]
     subcat = SubCat.objects.all()
     cat = Category.objects.all()
     site = Main.objects.get(pk=1)
-    context={
-        'site':site,
-        'popnews':popnews,
-        'cat':cat,
-        'subcat':subcat
+    context = {
+        'site': site,
+        'popnews': popnews,
+        'cat': cat,
+        'subcat': subcat
     }
 
-    return render(request,'main/contact.html',context)
+    return render(request, 'main/contact.html', context)
+
+
+def change_password(request):
+    if request.method == 'POST':
+        oldpass = request.POST.get('oldpass')
+        newpass = request.POST.get('newpass')
+        if oldpass == "" and newpass == "":
+            messages.error(request, 'Alanlari bos gecmeyiniz')
+        user = authenticate(username=request.user, password=oldpass)
+        if user != None:
+            if len(newpass) < 8:
+                messages.error(request, 'Sifreniz 8 karekterden az olmamamli')
+            count1 = 0
+            count2 = 0
+            count3 = 0
+            count4 = 0
+            for i in newpass:
+                if i > "0" and i < "9":
+                    count1 = 1
+                if i > "A" and i < "Z":
+                    count2 = 1
+                if i > "a" and i < "z":
+                    count3 = 1
+                if i > "!" and i < "(":
+                    count4 = 1
+            if count1 == 1 and count2 == 1 and count3 == 1 and count4 == 1:
+                user = User.objects.get(username=request.user)
+                user.set_password(newpass)
+                user.save()
+                return redirect('logout')
+
+        else:
+            messages.error(request, 'your password not Correct')
+
+    return render(request, 'back/changepass.html')
