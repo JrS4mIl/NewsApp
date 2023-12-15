@@ -21,4 +21,22 @@ def manager_delete(request,pk):
 def manager_group(request):
     group=Group.objects.all()
     return render(request,'back/group.html',{'group':group})
+def add_group(request):
+    if request.method=="POST":
+        name=request.POST.get('name')
+        if name!="":
+            if len(Group.objects.filter(name=name))==0:
+                group=Group(name=name)
+                group.save()
+                messages.success(request,'Eklendi')
+
+    return redirect('manager_group')
+
+
+def manager_group_del(request,name):
+    d=Group.objects.filter(name=name)
+    d.delete()
+    messages.warning(request,'Silindi')
+
+    return redirect('manager_group')
 

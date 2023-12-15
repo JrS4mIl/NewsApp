@@ -8,8 +8,9 @@ from cat.models import Category
 from subcat.models import SubCat
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
-
+from ipware import get_client_ip
 from django.contrib import messages, auth
+from ip2geotools.databases.noncommercial import DbIpCity
 
 
 def home(request):
