@@ -3,6 +3,9 @@ from . import views
 
 urlpatterns = [
     path('panel/category/list',views.cat_list,name='cat_list'),
-    path('panel/category/add',views.cat_add,name='add_cat')
+    path('panel/category/add',views.cat_add,name='add_cat'),
+    path('export/cat/csv/',views.export_cat_csv,name='export_cat_csv'),
+    path('import/cat/csv/',views.import_cat_csv,name='import_cat_csv')
+
 
 ]

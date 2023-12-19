@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'subcat',
     'contactform',
     'manager',
-    'blacklist'
+    'blacklist',
+
 ]
 
 MIDDLEWARE = [
