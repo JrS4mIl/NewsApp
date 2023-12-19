@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'contactform',
     'manager',
     'blacklist',
-    'django_crontab'
+    'django_crontab',
+    'qr_code'
 
 ]
 

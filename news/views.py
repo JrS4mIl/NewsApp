@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from subcat.models import SubCat
 from cat.models import Category
 # Create your views here.
+import qrcode
 from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def news_detail(request, slug):
@@ -201,3 +202,16 @@ def news_edit(request,pk):
             return redirect('news_list')
 
     return render(request,'back/news_edit.html',context)
+
+
+def qr_code_view(request):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data('hello')
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    return render(request, 'detail.html', {'qr_image': img})

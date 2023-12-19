@@ -1,7 +1,9 @@
 {% extends 'main/base.html' %}
-
+{% load qr_code %}
 {% load static %}
+
 {% block head %}
+
 <title>{{site.name}} News Detail </title>
 {% endblock %}
 
@@ -194,6 +196,7 @@
 								{% endfor %}
 
 							</div>
+							<img src="{{ qr_image.url }}" alt="QR Code">
 						</div>
 					</div>
 				</div>
