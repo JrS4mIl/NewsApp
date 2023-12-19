@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'contactform',
     'manager',
     'blacklist',
+    'django_crontab'
 
 ]
 
@@ -140,3 +141,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 SITE_ID = 1
+
+CRONJOBS = [
+    ('*/5 * * * *', 'main.cron.my_scheduled_job')
+]
