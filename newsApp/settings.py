@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'manager',
     'blacklist',
     'django_crontab',
-    'qr_code'
+    'qr_code',
+    'django.contrib.sitemaps',
 
 ]
 

@@ -11,7 +11,10 @@ from django.contrib.auth import authenticate
 from ipware import get_client_ip
 from django.contrib import messages, auth
 from ip2geotools.databases.noncommercial import DbIpCity
-
+from zeep import  Client
+import  requests
+import json
+from bs4 import BeautifulSoup
 
 def home(request):
     site = Main.objects.get(pk=1)

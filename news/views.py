@@ -6,7 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from subcat.models import SubCat
 from cat.models import Category
 # Create your views here.
-import qrcode
+
 from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def news_detail(request, slug):
